@@ -1,7 +1,44 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import {Navigation} from 'react-native-navigation';
 
-class AddPost extends Component {
+interface PostsListProps {
+  componentId: string;
+}
+
+class AddPost extends Component<PostsListProps> {
+
+  constructor(props: PostsListProps) {
+    super(props);
+    Navigation.events().bindComponent(this);
+  }
+
+  static options() {
+    return {
+      topBar: {
+        rightButtons: [
+          {
+            id: 'save',
+            text: 'save'
+          }
+        ],
+        leftButtons: [
+          {
+            id: 'cancel',
+            text: 'cancel'
+          }
+        ]
+      }
+    };
+  }
+
+  navigationButtonPressed({buttonId}: {buttonId: string}) {
+    if (buttonId === 'cancel') {
+      Navigation.dismissModal(this.props.componentId);
+    } else if (buttonId === 'save') {
+      console.log('#DROR# : buttonId', buttonId)
+    }
+  }
 
   render() {
     return (
