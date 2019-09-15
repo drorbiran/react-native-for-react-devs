@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-class ViewPost extends Component {
+interface ViewPostProps {
+  text: string;
+}
+
+class ViewPost extends Component<ViewPostProps> {
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>ViewPost</Text>
+        <Text style={styles.text}>{`ViewPost ${this.props.text}`}</Text>
       </View>
     );
   }
