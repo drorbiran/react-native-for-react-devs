@@ -1,4 +1,4 @@
-import {postsStore} from './posts.store';
+import {postsStore} from './posts.reducer';
 
 const posts = [
   {
@@ -16,5 +16,8 @@ const posts = [
 ];
 
 export function fetchPosts() {
-  postsStore.setPosts(posts);
+  return {
+    type: 'FETCH_POSTS',
+    payload: posts
+  }
 }
