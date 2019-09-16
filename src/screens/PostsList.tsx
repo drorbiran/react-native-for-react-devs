@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Navigation} from 'react-native-navigation';
+import {connect} from 'remx';
+import {postsStore} from '../posts.store';
+import * as postsActions from '../posts.actions';
 
 interface PostsListProps {
   componentId: string;
+  posts: any;
 }
 
 class PostsList extends Component<PostsListProps> {
@@ -53,6 +57,10 @@ class PostsList extends Component<PostsListProps> {
     }
   }
 
+  componentDidMount(){
+    postsActions.fetchPosts();
+  }
+
   pushViewPostScreen = () => {
     Navigation.push(this.props.componentId, {
       component: {
@@ -75,12 +83,19 @@ class PostsList extends Component<PostsListProps> {
     return (
       <View style={styles.container}>
         <Text style={styles.text} onPress={this.pushViewPostScreen}>PostsList</Text>
+        <Text>{JSON.stringify(this.props.posts)}</Text>
       </View>
     );
   }
 }
 
-export default PostsList;
+function mapStateToProps() {
+  return {
+    posts: postsStore.getPosts()
+  }
+}
+
+export default connect(mapStateToProps)(PostsList);
 
 const styles = StyleSheet.create({
   container: {

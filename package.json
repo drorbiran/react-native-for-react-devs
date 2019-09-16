@@ -10,7 +10,8 @@
   "dependencies": {
     "react": "16.8.6",
     "react-native": "0.60.5",
-    "react-native-navigation": "^3.2.0"
+    "react-native-navigation": "^3.2.0",
+    "remx": "^2.0.58"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
