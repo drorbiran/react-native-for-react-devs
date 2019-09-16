@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TextInput} from 'react-native';
 import {Navigation} from 'react-native-navigation';
 
 interface PostsListProps {
@@ -19,7 +19,8 @@ class AddPost extends Component<PostsListProps> {
         rightButtons: [
           {
             id: 'save',
-            text: 'save'
+            text: 'save',
+            enabled: false
           }
         ],
         leftButtons: [
@@ -36,14 +37,32 @@ class AddPost extends Component<PostsListProps> {
     if (buttonId === 'cancel') {
       Navigation.dismissModal(this.props.componentId);
     } else if (buttonId === 'save') {
-      console.log('#DROR# : buttonId', buttonId)
+      Navigation.dismissModal(this.props.componentId);
     }
+  }
+
+  onChangeText = (text: string) => {
+    Navigation.mergeOptions(this.props.componentId, {
+      topBar: {
+        rightButtons: [
+          {
+            id: 'save',
+            text: 'save',
+            enabled: !!text
+          }
+        ],
+      }
+    });
   }
 
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>AddPost</Text>
+        <TextInput
+          onChangeText={text => this.onChangeText(text)}
+          placeholder={'Add the post title'}
+        />
       </View>
     );
   }
