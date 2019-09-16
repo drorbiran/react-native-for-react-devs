@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, FlatList} from 'react-native';
 import {Navigation} from 'react-native-navigation';
 import {connect} from 'remx';
 import {postsStore} from '../posts.store';
@@ -79,11 +79,21 @@ class PostsList extends Component<PostsListProps> {
     });
   }
 
+  renderItem = ({item}) => (
+    <Text>
+      {item.title}
+    </Text>
+  )
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.text} onPress={this.pushViewPostScreen}>PostsList</Text>
-        <Text>{JSON.stringify(this.props.posts)}</Text>
+        <FlatList
+          data={this.props.posts}
+          renderItem={this.renderItem}
+          keyExtractor={item => item.id}
+        />
       </View>
     );
   }
