@@ -35,6 +35,10 @@ const setters = remx.setters({
     // All functions that will change parts of the state should be wrapped within the setters function
   setPosts(posts: any){
     state.posts = posts;
+  },
+
+  addPost(post) {
+    state.posts = [...state.posts, post];
   }
 });
 

@@ -1,3 +1,4 @@
+console.disableYellowBox = true;
 import { Navigation } from 'react-native-navigation';
 import { registerScreens } from './screens';
 import { defaultStack } from './layouts';
